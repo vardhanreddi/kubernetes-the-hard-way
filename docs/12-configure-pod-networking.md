@@ -18,6 +18,10 @@ Reference: https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage
 
 Deploy weave network. Run only once on the `master` node.
 
+In order for Weave Net to work, you need to make sure IP forwarding is enabled on the worker nodes. Enable it by running the following on both workers:
+sudo sysctl net.ipv4.conf.all.forwarding=1
+echo "net.ipv4.conf.all.forwarding=1" | sudo tee -a /etc/sysctl.conf
+
 
 `kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"`
 
